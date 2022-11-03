@@ -1,5 +1,5 @@
-runFile: main.cpp
-	g++ -o runFile main.cpp
+runFile: main2.cpp
+	g++ -o runFile main2.cpp
 graph: runFile
 	./runFile
 clean:

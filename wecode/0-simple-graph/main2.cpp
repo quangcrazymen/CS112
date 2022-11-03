@@ -11,23 +11,21 @@ using namespace std;
 //###INSERT CODE HERE -
 void inputGraph(vector<vector<int>> &G,int v,int e){
 	//initialized all array to 0
-	for(auto i=0;i<v;i++){
-		G.push_back(vector<int>{v,0});
-	}
+	G=vector<vector<int>>(v, vector<int>(v, 0));
+	int a,b;
 	for(auto i=0;i<e;i++){
-		int u=v=0;
-		cin>>u>>v;
-		G[u-1][v-1]=1;
+		cin>>a>>b;
+		G[a-1][b-1]=1;
 	}
 }
 
 void process(vector<vector<int>> &G,int v,int n){
 	for(auto i=0;i<n;i++){
-		int option,u,v;
+		int option,a,b;
 		cin>>option;
 		if(option==1){
-			cin>>u>>v;
-			if(G[u-1][v-1]==1){
+			cin>>a>>b;
+			if(G[a-1][b-1]==1){
 				cout<<"TRUE"<<endl;
 			}
 			else{
@@ -35,14 +33,21 @@ void process(vector<vector<int>> &G,int v,int n){
 			}
 		}
 		else if(option==2){
-			cin>>u;
-			// int it = find (G[u-1].begin(), G[u-1].end(), 1);
-			for(auto &i:G[u-1]){
-				if(i==1){
-					cout<<i;
+			bool hvAdjVer=false;
+			cin>>a;
+			int index=0;
+			for(auto &j:G[a-1]){
+				if(j==1){
+					hvAdjVer=1;
+					cout<<index+1<<" ";
 				}
+				index++;
+			}
+			if(!hvAdjVer){
+				cout<<"NONE\n";
 			}
 		}
+		cout<<"\n";
 	}
 }
 
