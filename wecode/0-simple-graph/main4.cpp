@@ -46,6 +46,7 @@ void inputGraph(bool* G[],int e){
     int u,i;
     for(auto a=0;a<e;a++){
         cin>>u>>i;
+        // Undirected graph
         G[u-1][i-1]=1;
         G[i-1][u-1]=1;
     }

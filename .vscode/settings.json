@@ -8,6 +8,7 @@
         "numeric": "cpp",
         "streambuf": "cpp",
         "iostream": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "vector": "cpp"
     }
 }
