@@ -1,5 +1,5 @@
-runFile: Bai2-BSH-1.cpp
-	g++ -o runFile Bai2-BSH-1.cpp
+runFile: Bai6.cpp
+	g++ -o runFile Bai6.cpp
 graph: runFile
 	./runFile
 clean:

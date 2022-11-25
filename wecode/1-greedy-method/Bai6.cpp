@@ -3,11 +3,10 @@
 #include <map>
 #include <string>
 #include <utility>
-#include <cstring>
 
 using namespace std;
 
-int has(vector<pair<string,int>> list, string vertex)
+int has(vector<pair<char,int>> list, char vertex)
 {
     for (auto &i : list)
     {
@@ -19,28 +18,13 @@ int has(vector<pair<string,int>> list, string vertex)
     return false;
 }
 
-vector<string> split(string path){
-    vector<string> array;
-    for(auto i:path){
-        if(i==' '){
-            continue;
-        }
-        array.push_back(to_string(i));
-    }
-    // pop "." out of array 
-    array.pop_back();
-
-    return array;
-}
-
-int checkValidCycle(string path,map<string,vector<pair<string,int>>> graph){
-    vector<string> array = split(path);
+int checkValidCycle(vector<char> array,map<char,vector<pair<char,int>>> graph){
     // iterate through all keys
-    int totalDistance;
+    int totalDistance=0;
     for(auto i=array.begin();i<array.end()-1;i++){
         // iterate through each adjacent vertex of the key
-        if(has(graph[*i],*(i))>0){
-            totalDistance = has(graph[*i],*(i));
+        if(has(graph[*i],*(i+1))>0){
+            totalDistance += has(graph[*i],*(i+1));
             continue;
         }
         return false;
@@ -53,26 +37,34 @@ int main()
 {
     int e,n,distance;
     cin >> e>>n;
-    string fVertex, adjVertex,path;
+    char fVertex, adjVertex;
     // INITIALIZE ADJACENCY LIST
-    map<string, vector<pair<string,int>>> adjVerList;
+    map<char, vector<pair<char,int>>> adjVerList;
     for (auto i = 0; i < e; i++)
     {
         cin >> fVertex >> adjVertex>>distance;
         // check if vertex already in the list 
         if (!has(adjVerList[fVertex], adjVertex))
         {
-            pair<string,int> item;
+            pair<char,int> item;
             item.first=adjVertex;
             item.second=distance;
             adjVerList[fVertex].push_back(item);
         }
     }
-
     for(int i=0;i<n;i++){
-        cin.ignore();
-        getline(cin,path);
+        vector<char> path;
+        char ver;
+        while(ver!='.'){
+            cin>>ver;
+            if(ver!=' '){
+                path.push_back(ver);
+            }
+        }
+        path.pop_back();
+        ver='\0';
         int result = checkValidCycle(path,adjVerList);
+        path.clear();
         if(result>0){
             cout<<result<<'\n';
         }

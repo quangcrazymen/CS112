@@ -9,6 +9,8 @@
         "streambuf": "cpp",
         "iostream": "cpp",
         "list": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "map": "cpp",
+        "limits": "cpp"
     }
 }
