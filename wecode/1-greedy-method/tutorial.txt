@@ -1,0 +1,138 @@
+HƯỚNG DẪN THEO NGUYỆN VỌNG CỦA SV 
+
+
+Một số gợi ý của cô:
+
+- Cấu trúc dữ liệu:
+
+             vector<string> list_vertices; // danh sách đỉnh, tên đỉnh chuỗi
+
+             map<string, int> vertices_index; // ánh xạ tên đỉnh thành index
+
+             vector<vector<int> > matrix; // ma trận kề 
+
+             hoặc
+
+             map<string, set<string> > adj_list; // danh sách kề, cho tương ứng mỗi đỉnh là 1 tập các đỉnh kề với nó            
+
+             vector<int>sol(v, -1); // lưu kết quả tô màu, tương ứng mỗi đỉnh là mã màu đã tô, khởi gán = -1
+
+             vector<int>degree(v, 0); // lưu bậc hiện hành của mỗi đỉnh, bậc có thể thay đổi ở bước hạ bậc
+
+- Có 3 bước xử lý quan trọng trong chương trình: 
+
+1) chọn 1 đỉnh để tô (ĐỈNH CÓ BẬC CAO NHẤT HIỆN TẠI); 
+2) chọn 1 màu để tô cho 1 đỉnh (CHỌN LẠI MÀU CŨ, KHÔNG ĐƯỢC MỚI SỬ DỤNG MÀU MỚI; 
+3) xử lý hạ bậc và đánh dấu màu không được tô (nếu cần) (HẠ BẬC CÁC ĐỈNH KỀ VỚI ĐỈNH VỪA TÔ,  ĐỂ CẬP NHẬT LẠI BẬC CỦA CÁC ĐỈNH, TỪ ĐÓ CHỌN ĐƯỢC ĐỈNH TỐT NHẤT Ở BƯỚC KẾ TIẾP)
+
+.
+
+PROBLEM 1: Tô màu hoàn chỉnh
+
+-  Cách 1: Dùng ma trận kề,  không đánh dấu màu không được tô cho đỉnh trong lúc hạ bậc 
+
+.
+
+int choose_color( S ){ // Hàm chọn màu cho đỉnh S       
+
+        for(color = 0;color<m;color++){ // lần lượt thử từng màu đã dùng để tô trước đó, bắt đầu từ màu đầu tiên, đảm bảo màu đã dùng rồi vẫn  có thể dùng để tô lại, m là số màu đã sử dụng
+
+                 OK = true;
+
+                Vòng lặp duyệt các đỉnh của đồ thị
+
+                         if (j kề với S && đỉnh kề j đã tô màu color này rồi ) // thì không dùng được nũa
+
+                                 OK = false; break;// ghi nhận không dùng màu này được
+
+                  Kiểm tra nếu color dùng được thì return về màu này
+         } // end for color
+
+return (++m); // nếu các màu đã sử dụng không dùng được thì dùng màu mới, 
+}
+
+.
+
+Cách 2: dùng danh sách kề
+
+.
+
+int choose_color( S )  // Hàm chọn màu cho đỉnh S
+
+{     
+
+       for(color = 0; ; color++){ // thử qua các màu, bắt đầu từ mã màu 0
+
+              set<string>* adj = tìm các đỉnh kề (S); // lấy từ map adj_list
+
+              OK = true;
+
+              if (adj != NULL)
+
+             {
+
+                     set<string>::iterator it = adj->begin(); // con trỏ duyệt qua danh sách kề, it là đỉnh kề của S
+
+                     vòng lặp cho con trỏ chạy {
+
+                           if (đỉnh it đã tô màu color này rồi)){ // lấy màu đã tô cho đỉnh kề it, danh sách chứa string nên cần chuyển qua index
+
+                                 OK = false; break;}   }
+
+              Nếu màu color chọn được thì không xét tiếp màu khác
+
+          }
+
+         return color;
+
+}
+
+----------------------------------
+
+.
+
+PROBLEM 2: Tô màu lắc léo hơn
+
+ Khi chọn màu chỉ được sử dụng các màu đã tô trước đó (có thể không bắt đầu từ 0). Khi tô màu dù là các màu đã có hay chọn màu mới, luôn chọn màu có thứ tự nhỏ nhất có thể chọn được.
+
+VD: màu đã sử dụng = {2,3,4}. Khi thử tô lại màu đã sử dụng thì thử bắt đầu từ màu 2. Nếu thử hết các màu trên mà ko được thì phải tô màu mới, nhưng màu mới phải là màu có thứ tử nhỏ nhất có thể chọn được tức là màu 0.
+
+int ChonMau ( S, mảng màu đã sử dụng, mảng màu chung )
+
+        for each color in mảng màu đã sử dụng) { // có thể dùng mảng phụ để lưu các màu đã sử dụng, thử lại các màu đã tô bằng cách duyệt trên mảng này
+
+                 ... // giống như trên
+
+      new = chọn màu mới (mảng màu chung); // nếu các màu đã sử dụng không dùng được thì dùng màu mới, màu mới được lấy từ mảng chung, bắt đầu xét từ 0, bổ sung màu mới vào mảng màu đã sử dụng.
+
+return (new); 
+}
+
+MỘT SỐ THAO TÁC VỚI ĐỒ THỊ
+
+test case
+8 4
+
+K F 151
+
+F L 199
+
+L K 338
+
+H L 8
+
+K H 491
+
+F H 803
+
+K L 579
+
+H K 299
+
+F L F .
+
+L K H F L .
+
+L K F L .
+
+K F H L K.

@@ -23,15 +23,12 @@ string removeKdigits(string num, int k)
 		}
 	}
 
-	// Now remove the largest values from the top of the
-	// stack
+	// Now remove the largest values from the top of the stack
 	while (!mystack.empty() && k--)
 		mystack.pop();
 	if (mystack.empty())
-		return "0";
+		return "0\n";
 
-	// Now retrieve the number from stack into a string
-	// (reusing num)
 	while (!mystack.empty()) {
 		num[n - 1] = mystack.top();
 		mystack.pop();
@@ -46,6 +43,11 @@ int main()
     int k;
     getline(cin,input);
     cin>>k;
-	cout << removeKdigits(input, k);
+	if(k>input.length()){
+		cout<<"error"<<endl;
+	}
+	else{
+		cout << removeKdigits(input, k);
+	}
 	return 0;
 }
