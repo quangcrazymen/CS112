@@ -1,5 +1,5 @@
-runFile: Bai8.cpp
-	g++ -o runFile Bai8.cpp
+runFile: Bai9_backtracking.cpp
+	g++ -o runFile Bai9_backtracking.cpp
 graph: runFile
 	./runFile
 clean:

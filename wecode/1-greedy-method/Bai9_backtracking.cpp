@@ -55,8 +55,11 @@ public:
     }
     void graphColoring(){
         // number of possible color =99
-        int m=99;
-        this->graphColoringUtil(m,0);
+        for(auto i=0;i<99;i++){
+            // try from minimum possible color to maximum possible color (brute-force)
+            if(this->graphColoringUtil(i,0)==true)
+                break;
+        }
         for(int i= 0;i<this->adjMatrix.size();i++){
             cout<<this->sol[i]<<" ";
         }

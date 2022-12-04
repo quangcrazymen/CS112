@@ -76,7 +76,9 @@ public:
                 }
             }
         }
-
+        for(int i= 0;i<this->adjMatrix.size();i++){
+            cout<<this->sol[i]<<" ";
+        }
     }
 };
 
