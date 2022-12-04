@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <set>
+#include <utility>
 using namespace std;
 
 // UNDIRECTED GRAPH WITH NAME
@@ -12,7 +13,7 @@ class Graph
     // 2 maps to easily lookup key-value pair
     map<string, int> strToInt;
     map<int, string> intToStr;
-    vector<int>sol;
+    vector<pair<int,int>>sol;
     vector<int> degree;
     set<int> m;
 public:
@@ -71,5 +72,5 @@ int main(){
     a.nhap(v,e,n);
     // a.getDegree();
     cout<<"0 1 0 2 1 3 4";
-
+    // Use welsh algorithm
 }
