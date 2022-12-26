@@ -27,7 +27,7 @@ string removeKdigits(string num, int k)
 	while (!mystack.empty() && k--)
 		mystack.pop();
 	if (mystack.empty())
-		return "0\n";
+		return "0";
 
 	while (!mystack.empty()) {
 		num[n - 1] = mystack.top();
@@ -41,7 +41,7 @@ int main()
 {
     string input;
     int k;
-    getline(cin,input);
+	cin>>input;
     cin>>k;
 	if(k>input.length()){
 		cout<<"error"<<endl;
