@@ -1,5 +1,5 @@
-runFile: Bai5.cpp
-	g++ -o runFile Bai5.cpp
+runFile: Bai7.cpp
+	g++ -o runFile Bai7.cpp
 test: runFile
 	./runFile
 clean:
